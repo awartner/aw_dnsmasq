@@ -13,6 +13,7 @@ chef_version '>= 13.0' if respond_to?(:chef_version)
 
 supports 'debian', '>= 8.0'
 
-depends 'dnsmasq', '~> 0.2.0'
+depends 'apt', '~> 6.0'
+depends 'dnsmasq'
 depends 'hostsfile', '~> 3.0'
 depends 'iptables', '~> 4.0'

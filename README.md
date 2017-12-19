@@ -1,22 +1,32 @@
 # aw_dnsmasq
 
-Installs and configures DNS and DHCP servers using dnsmasq.
+Installs and configures my name server.
 
 ## Requirements
 
 ### Platforms
- * Debian
+ * Debian 9.0+
 
 ### Chef
- * Chef 12+
+ * Chef 13+
 
 ### Cookbooks
- * hostsfile
+ - apt
+ - dnsmasq
+ - hostsfile
+ - iptables
+
+## Attributes
+ - `default['aw_dnsmasq']['domain']` - the domain name
+ - `default['aw_dnsmasq']['network']` - allow clients on this network
+ - `default['aw_dnsmasq']['network']` - hash of upstream DNS servers, with enabled flag
+ - `default['aw_dnsmasq']['managed_hosts']` - hosts to add to DNS
+ - `default['aw_dnsmasq']['cnames']` - aliases to add to DNS
 
 ## Recipes
 
 ### Default
-Setup DNS and DHCP servers.
+Setup a DNS server.
 
 ## Usage
 Apply the default recipe to the node's run_list.

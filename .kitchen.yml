@@ -16,3 +16,5 @@ suites:
     run_list:
       - recipe[aw_dnsmasq::default]
     attributes:
+      aw_dnsmasq:
+        domain: test

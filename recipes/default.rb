@@ -53,6 +53,7 @@ node[cookbook_name]['cnames'].each do |cname, host|
   node.default['dnsmasq']['dns_options'].push("cname=#{cname},#{host}")
 end
 
+include_recipe 'apt'
 include_recipe 'dnsmasq::default'
 
 node[cookbook_name]['managed_hosts'].each do |addr, names|
