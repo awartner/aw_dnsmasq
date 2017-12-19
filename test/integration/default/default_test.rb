@@ -16,6 +16,6 @@ describe command('getent hosts') do
 end
 
 describe command('/sbin/iptables -L') do
-  its(:stdout) { should match(/ACCEPT\s+tcp\s+--\s+192.168.1.0\/24\s+anywhere\s+tcp dpt:domain state NEW/) }
-  its(:stdout) { should match(/ACCEPT\s+tcp\s+--\s+192.168.1.0\/24\s+anywhere\s+tcp dpt:domain/) }
+  its(:stdout) { should match(%r{ACCEPT\s+tcp\s+--\s+192.168.1.0\/24\s+anywhere\s+tcp dpt:domain state NEW}) }
+  its(:stdout) { should match(%r{ACCEPT\s+tcp\s+--\s+192.168.1.0\/24\s+anywhere\s+tcp dpt:domain}) }
 end
