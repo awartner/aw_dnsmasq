@@ -31,11 +31,10 @@ describe 'aw_dnsmasq::default' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'debian', version: '9.0') do |node|
         node.automatic['ipaddress'] = '1.2.3.4'
-        node.override['aw_dnsmasq']['domain'] = 'test'
         node.override['aw_dnsmasq']['server'] = { '1.2.3.1' => true }
         node.override['aw_dnsmasq']['network'] = '1.2.3.0/24'
-        node.override['aw_dnsmasq']['managed_hosts'] = { '1.2.3.99' => { hostname: 'fake.test', aliases: ['fake'] } }
-        node.override['aw_dnsmasq']['cnames'] = { 'alias.test' => 'fake.test' }
+        node.override['aw_dnsmasq']['managed_hosts'] = { '1.2.3.99' => { hostname: 'fake.example.com', aliases: ['fake'] } }
+        node.override['aw_dnsmasq']['cnames'] = { 'alias.example.com' => 'fake.example.com' }
       end.converge(described_recipe)
     end
 
@@ -46,8 +45,8 @@ describe 'aw_dnsmasq::default' do
     end
 
     it 'sets dnsmasq attributes' do
-      expect(node['dnsmasq']['dns']).to include(domain: 'test')
-      expect(node['dnsmasq']['dns']).to include(local: '/test/')
+      expect(node['dnsmasq']['dns']).to include(domain: 'example.com')
+      expect(node['dnsmasq']['dns']).to include(local: '/example.com/')
     end
 
     it 'listens on the nodes IP address' do
@@ -59,12 +58,12 @@ describe 'aw_dnsmasq::default' do
     end
 
     it 'assigns cnames' do
-      expect(chef_run.node['dnsmasq']['dns_options']).to include('cname=alias.test,fake.test')
+      expect(chef_run.node['dnsmasq']['dns_options']).to include('cname=alias.example.com,fake.example.com')
     end
 
     it 'adds hosts to the host file' do
       expect(chef_run).to create_hostsfile_entry('1.2.3.99')
-        .with(hostname: 'fake.test', aliases: ['fake'])
+        .with(hostname: 'fake.example.com', aliases: ['fake'])
     end
 
     it 'adds a firewall rule' do
