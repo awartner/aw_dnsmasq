@@ -4,7 +4,7 @@ maintainer_email 'aawartner@gmail.com'
 license 'MIT'
 description 'Installs and configures a DNS and DHCP server.'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '1.0.0'
+version '1.0.1'
 
 issues_url ''
 source_url ''
